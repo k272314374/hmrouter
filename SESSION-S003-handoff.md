@@ -8,7 +8,7 @@
 
 ## 1. S-003 一句话总结
 
-**13 域 113 项决策深聊全部锁定 → 7 条新 ADR + 5 个核心 spec 文档全部按新决策重写完成 → 一致性 11/11 → 全部推上 GitHub。**
+**13 域 113 项决策深聊全部锁定 → 7 条新 ADR + 5 个核心 spec 文档全部按新决策重写完成 → 一致性 15/15 → 全部推上 GitHub。**
 
 下一步是 **Phase 0 Harness Engineering**（建议在新窗口开始 + 多 agent 并行）。
 
@@ -33,7 +33,7 @@
 | 文档 | v 旧 | v 新 | 主要改动 |
 |---|---|---|---|
 | PRD-admin.md | v0.2 / 959 行 / 5 角色 / 18 模块按里程碑 | **v0.3 / 1178 行 / 6 角色 / 13 域** | 按域重组 + 严格 3 角色 + 新模块 |
-| PAGES-admin.md | v1 / 485 行 / 11 页 | **v2 / 823 行 / 38 页** | 6 角色菜单变形 + 17 公共组件 + 9 旅程 |
+| PAGES-admin.md | v1 / 485 行 / 11 页 | **v2 / 866 行 / 52 页** | 6 角色菜单变形 + 17 公共组件 + 9 旅程 |
 | PLAN.md | v0.10 / 13 张表 | **v0.11 / 24 张表** | AP27 6 角色 + 11 张新表 schema |
 | TASKS.md | 38 任务 | **117 任务（9 通道）** | Phase 0 Harness + 9 agent 通道 |
 | ARCHITECTURE.md | 12 表 | **24 表** + middleware 链扩展 | 反映新 enterprise 模块 |
@@ -175,7 +175,7 @@ git clone https://github.com/k272314374/hmrouter.git
 cd hmrouter
 
 # 2. 验证
-node scripts/check-consistency.js   # 应 11/11 ✅
+node scripts/check-consistency.js   # 应 15/15 ✅
 
 # 3. 启动 Claude Code
 
@@ -211,7 +211,7 @@ node scripts/check-consistency.js   # 应 11/11 ✅
 ✅ TASKS.md 重排（v2，9 通道）
 ✅ ARCHITECTURE.md 同步
 ✅ STATE.md 文档版本对照表对齐
-✅ 一致性检查 11/11
+✅ 一致性检查 15/15
 
 ---
 
@@ -223,5 +223,5 @@ node scripts/check-consistency.js   # 应 11/11 ✅
 - 已深聊域：13 / 13 ✅
 - 数据库表：24 张企业表 + 2 张原表扩展
 - M1 任务：117 个（9 通道并行 wall-clock 估 8.5d）
-- 一致性检查：11/11 ✅
+- 一致性检查：15/15 ✅
 - GitHub commits: 5 (从 initial 起)

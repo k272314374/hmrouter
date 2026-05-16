@@ -49,7 +49,7 @@
 - ✅ **TASKS v2 重排**（按 9 agent 通道；燃尽 M0 12 + Spec 5 + Phase0 9 + M1 104 = 130 任务；M2/M3 估 ~65 待展开）
 - ✅ **ARCHITECTURE 同步**（middleware 链 + enterprise 模块全图）
 - ✅ **校准产物**：SESSION-S003-handoff.md 更新 + STATE 下一步重写 + spec/error-rules.yaml + docs/agent-collaboration.md
-- ✅ 一致性检查 11/11 → commit + push (5 commits)
+- ✅ 一致性检查 15/15 → commit + push
 
 **关键发现 / 决策**：
 - 9 部门确认（含 9 部门一把手 = dept_admin）
@@ -104,7 +104,7 @@
 
 ## 下一步具体动作
 
-> **更新（S-003 末）**：spec 全部重写完成，11/11 ✅，已推 GitHub。
+> **更新（S-003 末）**：spec 全部重写完成，15/15 ✅，已推 GitHub。
 > 详细交接见 [SESSION-S003-handoff.md](SESSION-S003-handoff.md)。
 
 ### 立刻可启动（不阻塞）
@@ -202,15 +202,15 @@
 | ARCHITECTURE.md | 跟 PLAN v0.11 / PRD v0.3 / PAGES v2 对齐（S-003 重构）| 751 |
 | DLP-deferred.md | 静态归档 | 173 |
 | CLAUDE.md | v1（S-003：加 §3.5 编码原则 + ADR/文档地图）| 325 |
-| STATE.md | 本文（每次会话更新） | 229 |
+| STATE.md | 本文（每次会话更新） | 228 |
 | TASKS.md | v2（S-003 重构：9 通道并行；燃尽 130 任务，M1 104）| 460 |
-| DECISIONS.md | ADR-001 ~ ADR-019（S-003 加 7 条；ADR-015 superseded） | 445 |
-| docs/workflow.md | v1（S-002 新建） | 366 |
+| DECISIONS.md | ADR-001 ~ ADR-019（S-003 加 7 条；ADR-015 superseded） | 439 |
+| docs/workflow.md | v1（S-002 建；S-003 更新 CHK 列表）| 370 |
 | docs/session-handoff.md | v1（S-002 新建） | 194 |
-| SESSION-S003-handoff.md | S-003 新建（spec 完成 + 校准）| 226 |
+| SESSION-S003-handoff.md | S-003 新建（spec 完成 + 校准）| 227 |
 | spec/error-rules.yaml | S-003 新建（M1 5 条诊断规则） | 155 |
 | docs/agent-collaboration.md | S-003 新建（9 通道协作规约 + CODEOWNERS）| 253 |
-| scripts/check-consistency.js | 15 项检查（S-003 升级）| 574 |
+| scripts/check-consistency.js | 15 项检查（S-003 升级）| 573 |
 | knowledge-graph/INDEX.md | 跟 commit 196a82d 对齐 | 239 |
 | knowledge-graph/query.js | 13 查询命令 | 330 |
 

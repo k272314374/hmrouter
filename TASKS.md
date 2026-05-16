@@ -120,7 +120,7 @@
 |----|------|------|------|
 | S-S01 | DECISIONS.md 加 ADR-013~019 | ✓ | done |
 | S-S02 | PRD-admin.md v0.3 重写（按 13 域 + 6 角色）| ✓ | done |
-| S-S03 | PAGES-admin.md v2 重写（38 页 + 6 角色菜单）| ✓ | done |
+| S-S03 | PAGES-admin.md v2 重写（52 页 + 6 角色菜单）| ✓ | done |
 | S-S04 | PLAN.md v0.11（24 张表 + AP27 6 角色）| ✓ | done |
 | S-S05 | TASKS.md v2 重排（按 agent 通道）| ⏳ | in progress |
 | S-S06 | ARCHITECTURE.md 同步反映新模块 | ☐ | next |

@@ -251,23 +251,27 @@ gh pr create --draft
 node scripts/check-consistency.js
 ```
 
-**当前 11 项检查**：
+**当前 15 项检查**：
 | ID | 检查 |
 |----|------|
 | CHK-01 | 企业新表数量在所有文档一致 |
-| CHK-02 | AP 引用都在 PLAN §2 范围内 |
+| CHK-02 | AP 引用都在 PLAN §2 范围内（AP2/3/4/9/10 已移 DLP，引用合法）|
 | CHK-03 | ADR 引用都在 DECISIONS.md 范围内 |
 | CHK-04 | STATE 文档版本对照表的行数与实际一致（±5% 容忍）|
 | CHK-05 | PLAN 顶部版本号与 §0.3 最新一致 |
 | CHK-06 | knowledge-graph 数据点跨文档一致（节点/边/层/厂商/组件/i18n）|
-| CHK-07 | TASKS 燃尽快报数字内部一致 |
+| CHK-07 | TASKS 燃尽快报 M1 任务数内部一致 |
 | CHK-08 | DLP 内容无泄漏回主文档 |
 | CHK-09 | 所有必要文件存在 |
-| CHK-10 | PRD 权限矩阵 5 角色都列了 |
+| CHK-10 | PRD/PAGES 6 角色都齐 |
 | CHK-11 | PLAN §10.0 总览中 M1 实现表数 = 实际 M1 表数 |
+| CHK-12 | PAGES 页面数与 CLAUDE/STATE 声明一致 |
+| CHK-13 | CLAUDE "AP 原则 N 条" 与 PLAN §2 实际定义数一致 |
+| CHK-14 | STATE 任务数引用与 TASKS 燃尽一致 |
+| CHK-15 | TASKS 燃尽 M1 数 = M1 章节实际任务行数 |
 
 **规则**：
-- 修改后**必须 11 / 11 绿**才算改完
+- 修改后**必须 15 / 15 绿**才算改完
 - 失败当场修，不留尾巴
 - 加新检查项：在 `scripts/check-consistency.js` 末尾加一个 `check(...)` 块
 - 容忍误差（如行数 ±5%）已经内置，不要为此 disable check
