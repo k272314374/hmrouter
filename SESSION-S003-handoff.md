@@ -60,7 +60,7 @@
 - ✅ STATE.md "下一步具体动作" 重写
 - ✅ spec/error-rules.yaml 5 条核心错误诊断规则
 - ✅ docs/agent-collaboration.md 9 通道协作规约 + CODEOWNERS
-- ✅ docs/coding-principles.md 编码 4 原则（Karpathy 派生，编码 agent 必读）
+- ✅ 编码 4 原则（Karpathy 派生）集成进 CLAUDE.md §3.5（docs/coding-principles.md 留存为指针）
 
 ---
 
@@ -182,7 +182,7 @@ node scripts/check-consistency.js   # 应 11/11 ✅
 # 4. 让 Claude 按顺序读：
 #    CLAUDE.md → STATE.md → 本文件 SESSION-S003-handoff.md →
 #    DECISIONS.md ADR-013~019 → spec/error-rules.yaml →
-#    docs/agent-collaboration.md → docs/coding-principles.md
+#    docs/agent-collaboration.md（编码 4 原则见 CLAUDE.md §3.5）
 #
 # 读完应该说类似：
 #    "S-003 spec 重写已完成（PRD v0.3 / PAGES v2 / PLAN v0.11 / TASKS v2 / ARCH）。

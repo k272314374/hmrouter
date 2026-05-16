@@ -65,7 +65,7 @@
 
 **主线**：编码原则引入 → 四层对齐修补 → 仓库重组 → 页面评审修补
 
-- ✅ 新增 docs/coding-principles.md（Karpathy 4 原则，编码 agent 必读）
+- ✅ 编码 4 原则（Karpathy 派生）→ 集成进 CLAUDE.md §3.5（docs/coding-principles.md 留存为指针）
 - ✅ PAGES/PRD 四层对齐修补：6 处不一致 + 3 DOPEN 收口（新增 P-M1-WS-07 我的账户 / AI 对接员可导出 / Skill·课程管理双条件 / `/admin/*`→`/enterprise/*` 路由迁移 / 登录落地表 / 元审计 ID 改 AA）
 - ✅ **仓库重组**：fork QuantumNous/new-api → k272314374/hmrouter；方案文档全部并入；
   从此**单仓库** = new-api 代码 + enterprise 待建 + 方案文档。origin=fork / upstream=官方。
@@ -201,7 +201,7 @@
 | PAGES-admin.md | v2（S-003：6 角色 + 52 页 + 四层对齐修补）| 866 |
 | ARCHITECTURE.md | 跟 PLAN v0.11 / PRD v0.3 / PAGES v2 对齐（S-003 重构）| 751 |
 | DLP-deferred.md | 静态归档 | 173 |
-| CLAUDE.md | v1（S-003 末加 ADR/文档地图）| 235 |
+| CLAUDE.md | v1（S-003：加 §3.5 编码原则 + ADR/文档地图）| 325 |
 | STATE.md | 本文（每次会话更新） | 229 |
 | TASKS.md | v2（S-003 重构：9 通道并行；燃尽 130 任务，M1 104）| 460 |
 | DECISIONS.md | ADR-001 ~ ADR-019（S-003 加 7 条；ADR-015 superseded） | 445 |
@@ -210,7 +210,7 @@
 | SESSION-S003-handoff.md | S-003 新建（spec 完成 + 校准）| 226 |
 | spec/error-rules.yaml | S-003 新建（M1 5 条诊断规则） | 155 |
 | docs/agent-collaboration.md | S-003 新建（9 通道协作规约 + CODEOWNERS）| 253 |
-| docs/coding-principles.md | S-003 新建（编码 4 原则，Karpathy 派生）| 131 |
+| docs/coding-principles.md | 指针（内容已并入 CLAUDE.md §3.5）| 18 |
 | scripts/check-consistency.js | 15 项检查（S-003 升级）| 574 |
 | knowledge-graph/INDEX.md | 跟 commit 196a82d 对齐 | 239 |
 | knowledge-graph/query.js | 13 查询命令 | 330 |

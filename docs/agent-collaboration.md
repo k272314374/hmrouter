@@ -70,7 +70,7 @@
 
 ## 5. 编码风格 + 提交规范
 
-> ⚠️ 编码行为铁律见 [coding-principles.md](coding-principles.md)（4 原则：Think Before Coding / Simplicity First / Surgical Changes / Goal-Driven）— **每个编码 agent 启动必读**。
+> ⚠️ 编码行为铁律见 [CLAUDE.md §3.5 编码原则](../CLAUDE.md)（4 原则：Think Before Coding / Simplicity First / Surgical Changes / Goal-Driven）— CLAUDE.md 每会话自动加载，编码前必读。
 
 ### Go
 - `gofmt -s` 强制（pre-commit hook 已配）
@@ -236,7 +236,7 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
 
 ```
 1. 启动 agent
-2. 读 CLAUDE.md → STATE.md → TASKS.md → 本文件 → coding-principles.md
+2. 读 CLAUDE.md（含 §3.5 编码原则）→ STATE.md → TASKS.md → 本文件
 3. 找通道下一个 ☐ 任务，标 ⏳ + commit "[T-XX01] claim"
 4. 实现 + 单元测试
 5. PR：commit "[T-XX01] <description>" + push + 自动 CI
