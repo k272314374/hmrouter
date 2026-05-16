@@ -574,11 +574,11 @@ type Adaptor interface {
 │                                                                  │
 │  ── 公告域 ──                                                    │
 │  announcements/             公告列表 + 详情（员工查看）           │
-│  admin/announcements/       ★ 公告管理（含 TipTap 富文本）       │
+│  enterprise/announcements/  ★ 公告管理（含 TipTap 富文本）       │
 │                                                                  │
 │  ── Skill / 课程管理域（数智营销中心独家）──                       │
-│  admin/skills/              Skill 上传 + 编辑                     │
-│  admin/courses/             课程章节编辑                          │
+│  enterprise/skills/         Skill 上传 + 编辑                     │
+│  enterprise/courses/        课程章节编辑                          │
 │                                                                  │
 │  ── 系统域（仅 root，多数复用）──                                  │
 │  admin/health/              健康检查（M1）                        │

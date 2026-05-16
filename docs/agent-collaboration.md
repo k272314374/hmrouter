@@ -19,7 +19,7 @@
 | **Backend-D** Resources/Inbox | `enterprise/controller/{announcements,announcement_ack,skills,courses,resources,inbox,devices,service_accounts,health}.go` / `enterprise/middleware/ip_whitelist.go` / `cli/*` / `enterprise/service/notification_pusher.go` (M2) | — |
 | **Frontend-A** 公共组件 + 员工域 | `web/default/src/components/ui-enterprise/*` / `web/default/src/features/workspace/*` / `web/default/src/features/help/*` | 其他前端 features |
 | **Frontend-B** 企业管理 + 调用记录 | `web/default/src/features/enterprise/*` (除 announcements 子目录) / `web/default/src/features/audit/*` | — |
-| **Frontend-C** 公告/Skill/课程/系统域 | `web/default/src/features/admin/announcements/*` / `web/default/src/features/admin/skills/*` / `web/default/src/features/admin/courses/*` / `web/default/src/features/admin/health/*` / `web/default/src/features/admin/dept-model-acl/*` / **路由 / 菜单 filter** | — |
+| **Frontend-C** 公告/Skill/课程/系统域 | `web/default/src/features/enterprise/announcements/*` / `.../enterprise/skills/*` / `.../enterprise/courses/*` / `.../admin/health/*` / `.../admin/dept-model-acl/*` / `.../admin/system-settings/*` / **路由 / 菜单 filter** | — |
 | **DevOps-Agent** | `.github/workflows/*` / `scripts/*` (除 seed) / `docker-compose.*.yml` / `Dockerfile` | 应用代码 |
 
 ---
@@ -185,7 +185,11 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
 /web/default/src/features/enterprise/           @frontend-b
 /web/default/src/features/audit/                @frontend-b
 
-# Frontend-C
+# Frontend-C（注：announcements/skills/courses 虽在 features/enterprise/ 下，
+#           但归 Frontend-C；CODEOWNERS 后行更具体者优先）
+/web/default/src/features/enterprise/announcements/ @frontend-c
+/web/default/src/features/enterprise/skills/        @frontend-c
+/web/default/src/features/enterprise/courses/       @frontend-c
 /web/default/src/features/admin/                @frontend-c
 /web/default/src/router/                        @frontend-c
 /web/default/src/components/Layout/Menu*        @frontend-c

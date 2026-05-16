@@ -1,7 +1,7 @@
 # 当前状态
 
 > 这是项目的"动态心跳"。任何会话开局必读。会话结束前必更新。
-> 最后更新：2026-05-15  ·  当前会话：S-003（换机中断，新机续聊读 SESSION-S003-handoff.md）
+> 最后更新：2026-05-16  ·  当前会话：S-003（跨日续；新会话读 SESSION-S003-handoff.md）
 
 ---
 
@@ -46,7 +46,7 @@
 - ✅ **PRD-admin v0.3 重写**（v0.2 959 行 → v0.3 1178 行，按 13 域 + 6 角色）
 - ✅ **PAGES-admin v2 重写**（v1 485 行 → v2 823 行，52 页 + 6 角色菜单）
 - ✅ **PLAN v0.11**（24 张企业表 + AP27 6 角色 + 11 张新表 schema）
-- ✅ **TASKS v2 重排**（M0-M1 共 100 任务按 9 agent 通道；M2/M3 估 ~65 待展开）
+- ✅ **TASKS v2 重排**（按 9 agent 通道；燃尽 M0 12 + Spec 5 + Phase0 9 + M1 104 = 130 任务；M2/M3 估 ~65 待展开）
 - ✅ **ARCHITECTURE 同步**（middleware 链 + enterprise 模块全图）
 - ✅ **校准产物**：SESSION-S003-handoff.md 更新 + STATE 下一步重写 + spec/error-rules.yaml + docs/agent-collaboration.md
 - ✅ 一致性检查 11/11 → commit + push (5 commits)
@@ -61,7 +61,20 @@
 - 错误诊断不暴露 prompt 关键词
 - M1 单线 26d → 9 通道并行 wall-clock 8.5d（含 7.5d buffer）
 
-**下一步**：Phase 0 Harness Engineering（建议新窗口 + 4 agent 并行）
+### S-003 续（2026-05-16）
+
+**主线**：编码原则引入 → 四层对齐修补 → 仓库重组 → 页面评审修补
+
+- ✅ 新增 docs/coding-principles.md（Karpathy 4 原则，编码 agent 必读）
+- ✅ PAGES/PRD 四层对齐修补：6 处不一致 + 3 DOPEN 收口（新增 P-M1-WS-07 我的账户 / AI 对接员可导出 / Skill·课程管理双条件 / `/admin/*`→`/enterprise/*` 路由迁移 / 登录落地表 / 元审计 ID 改 AA）
+- ✅ **仓库重组**：fork QuantumNous/new-api → k272314374/hmrouter；方案文档全部并入；
+  从此**单仓库** = new-api 代码 + enterprise 待建 + 方案文档。origin=fork / upstream=官方。
+  旧纯文档仓归档为 hmrouter-spec-archive。M1-T01/T02/T03 实质完成。
+- ✅ 页面评审修补：M1 任务数 74→104 订正 / PRD 账户偏好行勾选统一 / 命名图例补 AA / 路由迁移跨文档残留清理（ARCHITECTURE + agent-collaboration）
+
+**当前仓库**：`E:\Huamei Project\hmrouter\` 就是项目仓库（= new-api fork），代码 + 文档同仓。
+
+**下一步**：M1-T04 创建 enterprise/ 骨架 → Phase 0 Harness Engineering（建议新窗口 + 4 agent 并行）
 
 ### S-002（2026-05-14）
 
@@ -189,16 +202,16 @@
 | ARCHITECTURE.md | 跟 PLAN v0.11 / PRD v0.3 / PAGES v2 对齐（S-003 重构）| 751 |
 | DLP-deferred.md | 静态归档 | 173 |
 | CLAUDE.md | v1（S-003 末加 ADR/文档地图）| 235 |
-| STATE.md | 本文（S-002 新建，每次会话更新） | ~175 |
-| TASKS.md | v2（S-003 重构：9 通道并行；M0-M1 共 100 任务）| 460 |
+| STATE.md | 本文（每次会话更新） | 229 |
+| TASKS.md | v2（S-003 重构：9 通道并行；燃尽 130 任务，M1 104）| 460 |
 | DECISIONS.md | ADR-001 ~ ADR-019（S-003 加 7 条；ADR-015 superseded） | 445 |
 | docs/workflow.md | v1（S-002 新建） | 366 |
 | docs/session-handoff.md | v1（S-002 新建） | 194 |
 | SESSION-S003-handoff.md | S-003 新建（spec 完成 + 校准）| 226 |
 | spec/error-rules.yaml | S-003 新建（M1 5 条诊断规则） | 155 |
-| docs/agent-collaboration.md | S-003 新建（9 通道协作规约 + CODEOWNERS）| 249 |
+| docs/agent-collaboration.md | S-003 新建（9 通道协作规约 + CODEOWNERS）| 253 |
 | docs/coding-principles.md | S-003 新建（编码 4 原则，Karpathy 派生）| 131 |
-| scripts/check-consistency.js | S-002 新建，11 项检查 | ~330 |
+| scripts/check-consistency.js | 15 项检查（S-003 升级）| 574 |
 | knowledge-graph/INDEX.md | 跟 commit 196a82d 对齐 | 239 |
 | knowledge-graph/query.js | 13 查询命令 | 330 |
 

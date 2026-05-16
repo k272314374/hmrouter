@@ -35,7 +35,7 @@
 
 ## 1. 页面总清单
 
-> 命名：`P-<里程碑>-<域>-<编号>` （域两字母：WS=Workspace 员工 / HP=Help / EN=Enterprise / AU=Audit / AN=Announcement / SK=Skill 管理 / CR=Course 管理 / S=System / DB=Dept Budget / AP=Approval / RE=Risk Event / CA=Case / KP=KPI / HR=HR / NT=Notification）
+> 命名：`P-<里程碑>-<域>-<编号>` （域两字母：WS=Workspace 员工 / HP=Help / EN=Enterprise / AU=Audit 调用记录 / AA=Admin-action Audit 元审计 / AN=Announcement / SK=Skill 管理 / CR=Course 管理 / S=System / DB=Dept Budget / AP=Approval / RE=Risk Event / CA=Case / KP=KPI / HR=HR / NT=Notification）
 
 ### 1.1 员工域（全员可访问，common 角色主战场）
 

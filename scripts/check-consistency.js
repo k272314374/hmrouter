@@ -505,6 +505,40 @@ check("CHK-11", "PLAN §10.0 总览中 M1 实现表数 = 实际 M1 表数", () =
   return issues;
 });
 
+// CHK-15: TASKS 燃尽 M1 数 == M1 章节 9 通道实际任务行数
+check("CHK-15", "TASKS 燃尽 M1 数 = M1 章节实际任务行数", () => {
+  const issues = [];
+  const text = read("TASKS.md");
+  // 燃尽快报 M1 行声明数
+  const burndownM1 = text.match(
+    /\|\s*\*\*M1\*\*\s*\|[^|]+\|[^|]+\|\s*\*?\*?(\d+)\*?\*?\s*\|/
+  );
+  if (!burndownM1) {
+    issues.push({ msg: "TASKS 燃尽快报没找到 M1 行" });
+    return issues;
+  }
+  const declared = parseInt(burndownM1[1]);
+  // 截取 "## M1：演示版" 到 "## M1 收尾" 之间
+  const start = text.indexOf("## M1：演示版");
+  const end = text.indexOf("## M1 收尾");
+  if (start < 0 || end < 0 || end < start) {
+    issues.push({ msg: "TASKS 找不到 M1 章节边界（## M1：演示版 / ## M1 收尾）" });
+    return issues;
+  }
+  const section = text.slice(start, end);
+  // 任务行：| T-XX01 | ... 或 | **M1-T01** | ...（XX = 两字母通道码）
+  const rows = section.match(
+    /^\|\s*\*?\*?(?:T-[A-Z]{2}\d+|M1-T\d+)\*?\*?\s*\|/gm
+  );
+  const actual = rows ? rows.length : 0;
+  if (actual !== declared) {
+    issues.push({
+      msg: `TASKS 燃尽 M1=${declared}，但 M1 章节实际任务行 ${actual} 个（9 通道之和）`,
+    });
+  }
+  return issues;
+});
+
 // ════════════════════════════════════════════════════════
 // OUTPUT
 // ════════════════════════════════════════════════════════
