@@ -60,7 +60,7 @@
 - ✅ STATE.md "下一步具体动作" 重写
 - ✅ spec/error-rules.yaml 5 条核心错误诊断规则
 - ✅ docs/agent-collaboration.md 9 通道协作规约 + CODEOWNERS
-- ✅ 编码 4 原则（Karpathy 派生）集成进 CLAUDE.md §3.5（docs/coding-principles.md 留存为指针）
+- ✅ 编码 4 原则（Karpathy 派生）集成进 CLAUDE.md §3.5
 
 ---
 

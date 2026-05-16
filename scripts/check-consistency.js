@@ -368,7 +368,6 @@ check("CHK-09", "所有必要文件存在", () => {
     "SESSION-S003-handoff.md",
     "spec/error-rules.yaml",
     "docs/agent-collaboration.md",
-    "docs/coding-principles.md",
     "scripts/check-consistency.js",
   ];
   required.forEach((f) => {
