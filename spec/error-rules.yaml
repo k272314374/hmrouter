@@ -1,0 +1,155 @@
+# 错误诊断规则库（M1 核心 5 条）
+#
+# 用途：员工/AI 对接员看到调用失败时，系统自动给出诊断 + 修复建议
+# 关键约束（ADR-019）：诊断引擎仅基于元数据，**绝不读 prompt/response 内容**
+#
+# 加载位置：enterprise/service/error_diagnosis.go
+# 触发位置：
+#   - 员工工作台"出错调用"折叠区
+#   - AI 对接员/部门 admin 看员工详情时
+#   - 调用详情页（仅 3 角色见详情，但诊断卡片所有人都见）
+#
+# 字段：
+#   id          唯一规则 ID
+#   name        规则名称（admin 可见）
+#   match       匹配条件（http_status / token_state / quota_state / channel_state / freq_pattern）
+#   severity    high / medium / low
+#   diagnosis   推断的根本原因（中文，给员工看）
+#   action      修复建议（中文）+ 跳转 URL（占位符 ${...} 由前端替换）
+#   target      诊断显示给谁：employee / liaison / both
+#   audit_log   该规则命中时是否要写元审计（一般 false）
+#
+# 注意：
+#   - diagnosis / action 字段**不允许**包含 prompt 关键词
+#   - 多条规则可同时命中，按 severity 排序展示
+
+version: 1
+updated_at: "2026-05-15"
+
+rules:
+  # ─────────────────────────────────────────────────────
+  # R1: Token 失效（最高频，员工换 Token / 重置后未更新客户端）
+  # ─────────────────────────────────────────────────────
+  - id: R1-token-invalid
+    name: Token 失效
+    match:
+      http_status: 401
+      token_state: revoked_or_mismatch    # token 不存在 or device-token 不匹配
+    severity: high
+    diagnosis: |
+      你的 API Token 已失效。可能原因：
+      - 你最近重置了 Token，但 WorkBuddy/OpenClaw 配置中还是旧的
+      - 你的设备未通过白名单校验（换了新机器？）
+    action: |
+      立即修复：
+      1. 复制工作台最新 Token → 替换客户端配置
+      2. 如果换了新机器，先用 hmrouter-cli activate 激活
+      [📋 复制最新 Token](${workspace_url})
+      [💻 查看我的设备](${devices_url})
+    target: both
+    audit_log: false
+
+  # ─────────────────────────────────────────────────────
+  # R2: 配额耗尽（个人限流）
+  # ─────────────────────────────────────────────────────
+  - id: R2-quota-exhausted
+    name: 已达个人配额上限
+    match:
+      http_status: 429
+      quota_state: personal_limit_reached
+    severity: high
+    diagnosis: |
+      你今日的调用次数已达上限（默认 2000 次/日，QPS 10）。
+      上限按员工总额计算（不分设备）。
+    action: |
+      可选方案：
+      1. 等明日 0:00 自动重置
+      2. 紧急用途可申请临时配额（部门 admin 30 分钟内审批）
+      [💼 申请临时配额](${budget_approval_url})  ⏳ M2 上线
+    target: both
+    audit_log: false
+
+  # ─────────────────────────────────────────────────────
+  # R3: 模型不可用（部门权限不足）
+  # ─────────────────────────────────────────────────────
+  - id: R3-model-not-allowed
+    name: 该模型对你的部门不开放
+    match:
+      http_status: 403
+      reason_code: dept_model_acl_denied
+    severity: medium
+    diagnosis: |
+      你所在部门未开通该模型的使用权限。
+      （示例：金融三部门 — 证券投资部 / 金融事业部 / 股权事业部 — 默认禁境外模型 GPT/Claude，
+        需走集团审批才能开通）
+    action: |
+      可选方案：
+      1. 切换到部门已授权的模型（推荐 DeepSeek-V3）
+      2. 如确有合规理由用此模型，联系部门 admin 走集团审批
+      [📦 查看可用模型](${models_url})
+    target: both
+    audit_log: false
+
+  # ─────────────────────────────────────────────────────
+  # R4: 上游超时
+  # ─────────────────────────────────────────────────────
+  - id: R4-upstream-timeout
+    name: 上游 LLM 超时
+    match:
+      http_status: 504
+      channel_state: upstream_timeout
+    severity: medium
+    diagnosis: |
+      上游 LLM 服务响应超时，可能正在抖动。
+      网关已自动重试 N 次（取决于 channel 配置），仍失败则返回此错误。
+    action: |
+      可选方案：
+      1. 立即重试一次（多数情况下抖动是瞬时的）
+      2. 切换到其他模型（不同上游隔离）
+      3. 如持续超时，联系 admin 检查健康检查页
+      [🩺 健康检查](${health_url})  （仅 admin 可见）
+    target: both
+    audit_log: false
+
+  # ─────────────────────────────────────────────────────
+  # R5: 网关内部错误
+  # ─────────────────────────────────────────────────────
+  - id: R5-gateway-error
+    name: 网关内部错误
+    match:
+      http_status:
+        any_of: [500, 502, 503]
+      channel_state: not_upstream_error    # 排除是上游问题
+    severity: high
+    diagnosis: |
+      网关本身出错（非上游问题）。这种情况罕见，需 admin 介入。
+    action: |
+      已自动通知 admin，请稍后重试。
+      如紧急，请联系：
+      - 你部门的 AI 对接员
+      - 或集团 IT
+      错误 ID: ${request_id}（沟通时附上）
+    target: both
+    audit_log: false  # 网关错误本身有 logger，不需要重复写元审计
+
+# ─────────────────────────────────────────────────────
+# 拓展规则（M2 加）
+# ─────────────────────────────────────────────────────
+# 待加：
+# - R6: 设备未激活 (403, device_state: pending)
+# - R7: 单请求 prompt 过大 (413)
+# - R8: 部门预算超额 (M2 enforce 模式后, 402)
+# - R9: 异常调用模式（短时高频）→ 警示员工 + 通知部门 admin
+# - R10: 服务账号 owner 离职待交接 (403)
+# 等
+#
+# 命名规则：
+#   - 修复建议必须给出"立即可执行"的 action（链接或操作）
+#   - 不要用"请联系 admin" 兜底，要给具体角色 + 联系方式
+#   - target=employee 的规则避免暴露集团信息
+#   - target=liaison 的规则可包含统计/趋势
+#
+# 维护：
+#   - 内置规则改动需超管 + 写元审计
+#   - 自定义规则（M2+）合规审计专员可加（写元审计）
+#   - 改完热加载，无需重启
